@@ -6,39 +6,62 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="view/css/bootstrap.min.css">
   <!--  Bootstrap override-->
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="view/css/styles.css">
   <title><?=SITE_NAME?></title>
 </head>
   <body>
-    <table class="table">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">Class</th>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Exams Average</th>
-        <th scope="col">Data formation date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <?php foreach ($pupilsData["classes"] as $class => $pupilData):?>
-      <tr>
-        <th scope="row"><?=ucfirst($class)?></th>
-        <?php foreach ($pupilData as $pupil => $data):?>
-            <?php foreach ($data as $dataItem => $dataValue):?>
-              <?php if ($dataItem != "exams"):?>
-                <td><?=$dataValue?></td>
-              <?php endif;?>
-            <?php endforeach; ?>
-        <?php endforeach;?>
-      </tr>
-      <?php endforeach;?>
-      </tbody>
-    </table>
-
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Pupils Data</h1>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col">
+          <table class="table text-center">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Class</th>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Exams Average</th>
+              <th scope="col">Data formation date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($pupilsData["classes"] as $class => $pupilData):?>
+                <?php foreach ($pupilData as $pupil => $data):?>
+                <tr>
+                  <th scope="row"><?=ucfirst($class)?></th>
+                  <td><?=$data["id"]?></td>
+                  <td><?=$data["name"]?></td>
+                  <td><?=$data["lastName"]?></td>
+                    <?php if ($data["exams"]):?>
+                        <?php
+                        $counter = 0;
+                        $sum = 0;
+                        foreach ($data["exams"] as $subject => $grade) {
+                            $counter++;
+                            $sum += $grade;
+                        }
+                        $avgGrade = $sum/$counter;
+                        ?>
+                      <td><?=$avgGrade?></td>
+                    <?php endif;?>
+                  <td><?=$data["recordDate"]?></td>
+                </tr>
+                <?php endforeach;?>
+            <?php endforeach;?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -7,3 +7,4 @@
  */
 
 const SITE_NAME = "Pupils";
+const TABLE_TITLE = "Pupils Data for Sale";
