@@ -7,5 +7,6 @@
  */
 
 require "config/config.php";
-include "data/pupilData.php";
+include "data/flightsData.php";
 include "view/index.view.php";
+
