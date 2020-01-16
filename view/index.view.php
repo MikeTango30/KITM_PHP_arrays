@@ -41,15 +41,7 @@
                   <td><?=$data["name"]?></td>
                   <td><?=$data["lastName"]?></td>
                     <?php if ($data["exams"]):?>
-                        <?php
-                        $counter = 0;
-                        $sum = 0;
-                        foreach ($data["exams"] as $subject => $grade) {
-                            $counter++;
-                            $sum += $grade;
-                        }
-                        $avgGrade = $sum/$counter;
-                        ?>
+                        <?php $avgGrade = array_sum($data["exams"])/count($data["exams"]);?>
                       <td><?=$avgGrade?></td>
                     <?php endif;?>
                   <td><?=$data["recordDate"]?></td>
